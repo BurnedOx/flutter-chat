@@ -33,29 +33,7 @@ class MessageBubble extends StatelessWidget {
                 vertical: 10,
                 horizontal: 16,
               ),
-              child: Column(
-                crossAxisAlignment:
-                    isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    username,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: isMe
-                          ? Colors.black
-                          : Theme.of(context).accentTextTheme.bodyText1.color,
-                    ),
-                  ),
-                  Text(
-                    message,
-                    style: TextStyle(
-                      color: isMe
-                          ? Colors.black
-                          : Theme.of(context).accentTextTheme.bodyText1.color,
-                    ),
-                  ),
-                ],
-              ),
+              child: MessageBubbleText(isMe: isMe, username: username, message: message),
             ),
           ],
         ),
@@ -69,6 +47,46 @@ class MessageBubble extends StatelessWidget {
         ),
       ],
       overflow: Overflow.visible,
+    );
+  }
+}
+
+class MessageBubbleText extends StatelessWidget {
+  const MessageBubbleText({
+    Key key,
+    @required this.isMe,
+    @required this.username,
+    @required this.message,
+  }) : super(key: key);
+
+  final bool isMe;
+  final String username;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment:
+          isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: [
+        Text(
+          username,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: isMe
+                ? Colors.black
+                : Theme.of(context).accentTextTheme.bodyText1.color,
+          ),
+        ),
+        Text(
+          message,
+          style: TextStyle(
+            color: isMe
+                ? Colors.black
+                : Theme.of(context).accentTextTheme.bodyText1.color,
+          ),
+        ),
+      ],
     );
   }
 }
